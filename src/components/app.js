@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useMemo } from "react";
 import Link from "./link";
 import Header from "./header";

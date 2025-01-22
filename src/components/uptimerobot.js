@@ -1,5 +1,3 @@
-import React from "react";
-
 import ReactTooltip from "react-tooltip";
 import { useEffect, useState } from "react";
 import { GetMonitors } from "../common/uptimerobot";
