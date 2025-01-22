@@ -12,7 +12,7 @@ function UptimeRobot({ apikey }) {
     };
 
     // 获取 window.Config 中的配置
-    const { CountDays, ShowLink, TimelineDirection = "asc" } = window.Config;
+    const { CountDays, ShowLink, LinkRel = "noopener noreferrer", LinkTarget = "_blank", TimelineDirection = "asc" } = window.Config;
 
     const [monitors, setMonitors] = useState();
 
@@ -36,7 +36,12 @@ function UptimeRobot({ apikey }) {
                     <div className='meta'>
                         <span className='name' dangerouslySetInnerHTML={{ __html: site.name }} />
                         {ShowLink && site.url && (
-                            <Link className='link-ico' to={site.url} />
+                            <Link
+                                className='link-ico'
+                                to={site.url}
+                                rel={LinkRel}
+                                target={LinkTarget}
+                            />
                         )}
                         <span className={"status " + site.status}>{status[site.status]}</span>
                     </div>

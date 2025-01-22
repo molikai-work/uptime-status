@@ -24,6 +24,12 @@ window.Config = {
     // 是否显示检测站点的链接
     ShowLink: true,
 
+    // 检测站点的链接的链接的 rel 属性
+    LinkRel: "noopener noreferrer",
+
+    // 检测站点的链接的链接的target 属性
+    LinkTarget: "_blank",
+
     // 时间轴方向
     // 填 asc 或 desc，等同于显示日期“从旧到新”或“从新到旧”
     TimelineDirection: "asc",
@@ -35,12 +41,12 @@ window.Config = {
             url: "https://example.com/",
         },
         {
-            text: "示例NET",
+            text: "NET",
             url: "https://example.net/",
             target: "_blank",
         },
         {
-            text: "示例ORG",
+            text: "ORG",
             url: "https://example.org/",
             rel: "external nofollow noopener noreferrer",
             target: "_blank",
