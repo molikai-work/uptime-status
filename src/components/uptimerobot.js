@@ -36,7 +36,7 @@ function UptimeRobot({ apikey }) {
                     <div className='meta'>
                         <span className='name' dangerouslySetInnerHTML={{ __html: site.name }} />
                         {ShowLink && site.url && (
-                            <Link className='link-ico' to={site.url} text={site.name} />
+                            <Link className='link-ico' to={site.url} />
                         )}
                         <span className={"status " + site.status}>{status[site.status]}</span>
                     </div>
