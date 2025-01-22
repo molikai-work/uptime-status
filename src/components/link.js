@@ -1,6 +1,6 @@
-function Link({ text, to, rel = "", target = "_self" }) {
+function Link({ to, text, className = "" , rel = "", target = "_self"}) {
     return (
-        <a href={to} rel={rel} target={target}>
+        <a href={to} class={className} rel={rel} target={target}>
             {text}
         </a>
     );
