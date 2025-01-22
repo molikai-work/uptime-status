@@ -1,9 +1,11 @@
-function Link(props = { text, to }) {
-  return (
-    <a {...props} href={props.to} target='_blank'>
-      {props.text}
-    </a>
-  );
+import React from "react";
+
+function Link({ text, to, rel = "", target = "_self" }) {
+    return (
+        <a href={to} rel={rel} target={target}>
+            {text}
+        </a>
+    );
 }
 
 export default Link;
