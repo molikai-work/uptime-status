@@ -33,7 +33,7 @@ window.Config = {
     // 检测站点的链接的链接的 rel 属性
     LinkRel: "noopener noreferrer",
 
-    // 检测站点的链接的链接的target 属性
+    // 检测站点的链接的链接的 target 属性
     LinkTarget: "_blank",
 
     // 时间轴方向
