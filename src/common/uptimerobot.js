@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) molikai-work (2025)
+ * molikai-work 的特定修改和新增部分
+ * 根据 MIT 许可证发布
+ */
+
 import axios from "axios"; // 引入 axios 用于 HTTP 请求
 import dayjs from "dayjs"; // 引入 dayjs 处理日期时间
 import { formatNumber } from "./helper"; // 引入格式化数字的工具函数

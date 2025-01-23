@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) molikai-work (2025)
+ * molikai-work 的特定修改和新增部分
+ * 根据 MIT 许可证发布
+ */
+
 // UpTimerRobot API 代理
 export async function onRequest(context) {
     const { request, env } = context;

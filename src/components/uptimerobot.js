@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) molikai-work (2025)
+ * molikai-work 的特定修改和新增部分
+ * 根据 MIT 许可证发布
+ */
+
 import ReactTooltip from "react-tooltip";
 import { useEffect, useState } from "react";
 import { GetMonitors } from "../common/uptimerobot";
@@ -65,27 +71,13 @@ function UptimeRobot({ apikey }) {
                         })}
                     </div>
                     <div className='summary'>
-                        {TimelineDirection === "asc" ? (
-                            <>
-                                <span>{site.daily[site.daily.length - 1].date.format("YYYY-MM-DD")}</span>
-                                <span>
-                                    {site.total.times
-                                        ? `最近 ${CountDays} 天故障 ${site.total.times} 次，累计 ${formatDuration(site.total.duration)}，平均可用率 ${site.average}%`
-                                        : `最近 ${CountDays} 天可用率 ${site.average}%`}
-                                </span>
-                                <span>今天</span>
-                            </>
-                        ) : (
-                            <>
-                                <span>今天</span>
-                                <span>
-                                    {site.total.times
-                                        ? `最近 ${CountDays} 天故障 ${site.total.times} 次，累计 ${formatDuration(site.total.duration)}，平均可用率 ${site.average}%`
-                                        : `最近 ${CountDays} 天可用率 ${site.average}%`}
-                                </span>
-                                <span>{site.daily[site.daily.length - 1].date.format("YYYY-MM-DD")}</span>
-                            </>
-                        )}
+                        <span>{TimelineDirection === "asc" ? site.daily[site.daily.length - 1].date.format("YYYY-MM-DD") : "今天"}</span>
+                        <span>
+                            {site.total.times
+                                ? `最近 ${CountDays} 天故障 ${site.total.times} 次，累计 ${formatDuration(site.total.duration)}，平均可用率 ${site.average}%`
+                                : `最近 ${CountDays} 天可用率 ${site.average}%`}
+                        </span>
+                        <span>{TimelineDirection === "asc" ? "今天" : site.daily[site.daily.length - 1].date.format("YYYY-MM-DD")}</span>
                     </div>
                     <ReactTooltip className='tooltip' place='top' type='dark' effect='solid' />
                 </div>

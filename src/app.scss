@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) molikai-work (2025)
+ * molikai-work 的特定修改和新增部分
+ * 根据 MIT 许可证发布
+ */
+
 $primary-color: #3bd672;
 
 * {
@@ -28,7 +34,7 @@ a {
 
 #header {
 	background-color: #121a26;
-	padding: 30px 0 60px 0;
+	padding: 34px 0 60px 0;
 	color: $primary-color;
 	width: 100%;
 
@@ -192,6 +198,7 @@ a {
 	text-align: center;
 	line-height: 25px;
 	color: #969ea8;
+	margin-bottom: 1em;
 
 	a {
 		font-weight: bold;

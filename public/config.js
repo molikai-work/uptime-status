@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) molikai-work (2025)
+ * molikai-work 的特定修改和新增部分
+ * 根据 MIT 许可证发布
+ */
+
 window.Config = {
     // 网站显示标题
     SiteName: "Site Status",
@@ -46,8 +52,8 @@ window.Config = {
             target: "_blank",
         },
         {
-            text: "ORG",
-            url: "https://example.org/",
+            text: "GitHub",
+            url: "https://github.com/molikai-work/uptime-status",
             rel: "external nofollow noopener noreferrer",
             target: "_blank",
         },
