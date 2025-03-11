@@ -20,8 +20,10 @@ export async function onRequest(context) {
     }
 
     try {
-        const apiKeyMapping = await parseApiKeyMapping(env.API_KEY_MAPPING);
         const requestBody = await request.json();
+        const apiKeyMapping = await parseApiKeyMapping(env.API_KEY_MAPPING);
+
+        // 过滤请求参数
         const filteredBody = filterParams(requestBody, [
             "api_key", "custom_uptime_ranges", "log_types", "logs", "logs_end_date", "logs_start_date",
         ]);
@@ -35,11 +37,8 @@ export async function onRequest(context) {
         filteredBody.api_key = apiKeyMapping[filteredBody.api_key];
         filteredBody.format = "json";
 
-        // 设置 KV 缓存键
-        const cacheKey = generateCacheKey(filteredBody.api_key);
-
         // 检查 KV 中是否有缓存
-        let cachedResponse = await getCachedResponse(env.KV, cacheKey);
+        let cachedResponse = await getCachedResponse(env.KV, filteredBody.api_key);
         if (cachedResponse) {
             return new Response(cachedResponse, { status: 200, headers: getCorsHeaders() });
         }
@@ -55,16 +54,27 @@ export async function onRequest(context) {
         // 解析 API 响应
         const responseBody = await parseJson(apiResponse);
 
-        // 如果要隐藏 URL，则修改返回数据中的 monitors.url 字段
+        // 如果要隐藏 URL，则修改返回数据中的 monitors.url、monitor.sub_type 以及 monitor.port 字段
         if (env.HIDE_URL === "true" && responseBody?.monitors) {
             responseBody.monitors.forEach(monitor => {
                 monitor.url = null;
+                monitor.sub_type = null;
+                monitor.port = null;
+            });
+        }
+
+        // 如果要隐藏 Auth 信息，则修改返回数据中的 monitors.http_username、monitors.http_password 以及 monitors.http_auth_type 字段
+        if (env.HIDE_AUTH === "true" && responseBody?.monitors) {
+            responseBody.monitors.forEach(monitor => {
+                monitor.http_username = null;
+                monitor.http_password = null;
+                monitor.http_auth_type = null;
             });
         }
 
         // 缓存 API 响应
         if (apiResponse.status === 200 && env.KV) {
-            await cacheResponse(env.KV, cacheKey, responseBody, env.KV_TTL);
+            await cacheResponse(env.KV, filteredBody.api_key, responseBody, env.KV_TTL);
         }
 
         // 返回 API 响应
@@ -91,11 +101,6 @@ async function parseApiKeyMapping(apiKeyMappingEnv) {
 // 校验 API 密钥是否有效
 function isValidApiKey(apiKey, apiKeyMapping) {
     return apiKey && apiKeyMapping[apiKey];
-}
-
-// 生成缓存键
-function generateCacheKey(apiKey) {
-    return `uptimerobot:${apiKey}`;
 }
 
 // 发送错误响应
